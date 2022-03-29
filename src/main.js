@@ -5,6 +5,10 @@ import store from './store'
 import style from '@/assets/style.css'
 import axios from 'axios'
 import VueProgressBar from 'vue-progressbar'
+import Toasted from 'vue-toasted';
+Vue.use(Toasted, {
+  duration: 1500
+})
 
 const options = {
   color: '#bffaf3',
@@ -16,7 +20,7 @@ const options = {
     termination: 300
   },
   autoRevert: true,
-  location: 'left',
+  location: 'top',
   inverse: false
 }
 

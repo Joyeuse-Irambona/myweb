@@ -19,6 +19,8 @@
 </template>
 <script>
 import axios from 'axios'
+import Toasted from 'vue-toasted'
+import VueProgressBar from 'vue-progressbar'
 export default {
   name: "login",
   data(){
@@ -37,9 +39,11 @@ export default {
                 password: this.password
           });
           this.$Progress.finish();
+          this.$toasted.show("you login successfully")
            localStorage.setItem('token',response.data.token);
            this.$router.push('/list')
           } catch (error) {
+            this.$toasted.show("invalid email/password")
            console.log(error);
            this.$Progress.fail();
            
