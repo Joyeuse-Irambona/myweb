@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import Toasted from 'vue-toasted'
+import VueProgressBar from 'vue-progressbar'
 export default {
     data() {
         return {
@@ -31,6 +33,7 @@ export default {
 
     methods: {
         async getProduct() {
+            this.$progress.start();
             const id = this.$route.params.id;
             const res = await fetch(`http://product-v1.herokuapp.com/api/product/${id}`, {
                 method: 'GET',
@@ -50,6 +53,7 @@ export default {
 
         async updateProduct(e) {
             e.preventDefault();
+            this.$progress.start();
             const token = localStorage.getItem("token");
           axios.defaults.headers.common["Authorization"] = "Bearer "+token;
             const id = this.$route.params.id;
@@ -67,6 +71,7 @@ export default {
             });
 
             if (res.status === 200) {
+                this.$toasted.show("Data updated")
                 this.$router.push({ name: 'produt', params: { id: id } });
             }
         }

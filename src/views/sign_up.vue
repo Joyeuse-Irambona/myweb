@@ -1,46 +1,48 @@
 <template>
-    <div class="bkcont">
-        <h2>Sign Up</h2>
-        <form class="form" @submit.prevent="submitHandler()">
+<!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
 
-        <div v-if="error" class=" alert alert-danger" role="alert">
-        {{error}}
+        <div class="section-title">
+          <h2>SIGN UP</h2>
         </div>
 
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Enter your name" v-model="name"
-             class="form-control" :class="{ 'is-invalid': isSubmitted && $v.name.$error }" />
-             <div v-if="isSubmitted && !$v.name.required" class="invalid-feedback">Name field is required</div>
+        <div class="row">
+             <div class="col-lg-5 d-flex align-items-stretch">
+    
 
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" v-model="email" 
-             class="form-control" :class="{ 'is-invalid': isSubmitted && $v.email.$error }" />
-                <div v-if="isSubmitted && $v.email.$error" class="invalid-feedback">
-                    <span v-if="!$v.email.required">Email field is required</span>
-                    <span v-if="!$v.email.email">Please provide valid email</span>
-                </div> 
-            
-            
-            <label>Password</label>                  
-            <input type="password" name="password" placeholder="Enter your password" v-model="password" 
-             class="form-control" :class="{ 'is-invalid': isSubmitted && $v.password }" />
-            <div v-if="isSubmitted && $v.password.$error" class="invalid-feedback">
-                    <span v-if="!$v.password.required">Password field is required</span>
-                    <span v-if="!$v.password.minLength">Password should be at least 5 characters long</span>
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form" @submit.prevent="submitHandler()">
+              <div class="row">
+                  <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" class="form-control" name="subject" v-model="name" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" name="email" v-model="email" id="subject" required>
+              </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Password</label>
+                  <input type="password" class="form-control" name="password" v-model="password"  id="password" required>
                 </div>
-
-
-            <label>Confirm password</label>
-            <input type="password" name="password" placeholder="Confirm your password" v-model="password_confirmation" 
-             class="form-control" :class="{ 'is-invalid': isSubmitted && $v.password_confirmation.$error }"/>
-              <div v-if="isSubmitted && $v.password_confirmation.$error" class="invalid-feedback">
-                    <span v-if="!$v.password_confirmation.required">Confirm Password field is required</span>
-                    <span v-else-if="!$v.password_confirmation.sameAsPassword">Passwords should be matched</span>
+                <div class="form-group col-md-6">
+                  <label for="name">Confirm Password</label>
+                  <input type="password" class="form-control" name="password" v-model="password_confirmation" id="password" required>
                 </div>
+                <div class="text-center"><button type="submit">Sign Up</button></div>
+              </div>
+            </form>
+          </div>
 
-            <button type="submit" name="submit">Sign up</button>
-        </form>
-    </div>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+         
 </template>
 <script>
 import axios from 'axios'
@@ -69,6 +71,8 @@ export default {
 
          async submitHandler(){
           try {
+              this.$Progress.start();
+
               const response= await axios.post('http://product-mgt-api.herokuapp.com/api/register', {
                 name: this.name,
                 email: this.email,
@@ -76,8 +80,11 @@ export default {
                 password_confirmation: this.password_confirmation
 
           });
-         // this.$router.push('/login')
+          this.$Progress.finish();
+           this.$router.push('/login')
           } catch (error) {
+              this.$Progress.fail();
+              this.$toasted.show("email has been taken")
               console.log(error)
           }
 

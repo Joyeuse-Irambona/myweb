@@ -25,6 +25,8 @@
 
 <script>
 import axios from "axios";
+import Toasted from 'vue-toasted'
+import VueProgressBar from 'vue-progressbar'
 export default {
   name: "add",
   data() {
@@ -39,6 +41,7 @@ export default {
   methods: {
     async submitHandler() {
       try {
+        this.$Progress.start();
         const token = localStorage.getItem("token");
           axios.defaults.headers.common["Authorization"] = "Bearer "+token;
         const response = await axios.post(
@@ -52,19 +55,19 @@ export default {
           
         );
 
-        // this.$router.push('/login')
+        this.$router.push('/list')
       } catch (error) {
         console.log(error);
       }
 
-      /* if (re.status === 201) {
-                console.log('data sent');
+      if (re.status === 201) {
+                this.$toasted.show('data sent');
             }
             else {
-                console.log('fail to send data');
+                this.$toasted.show('fail to send data');
             }
              e.target.reset();
-             this.$router.push({ name: 'list' }); */
+             this.$router.push({ name: 'list' }); 
     },
   },
 };

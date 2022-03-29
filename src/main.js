@@ -2,16 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import style from '@/assets/style.css'
 import axios from 'axios'
 import VueProgressBar from 'vue-progressbar'
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {
-  duration: 1500
+  duration: '3000',
+  position: 'top-right',
 })
 
 const options = {
-  color: '#bffaf3',
+  color: 'black',
   failedColor: '#874b4b',
   thickness: '5px',
   transition: {

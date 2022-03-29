@@ -1,44 +1,59 @@
 <template>
-    <div  class="bkcont" id="app">
-      <div class="hd">
-         <nav class="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/login">Login</router-link> 
-       <router-link to="/signup">SignUp</router-link>
-       <router-link to="/">LogOut</router-link>
-    </nav>
-<vue-progress-bar/>
+<div>
+  <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="index.html">Electronics</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><router-link to="/" class="a">Home</router-link></li>
+            <li><router-link to="/login">Login</router-link></li>
+            <li>
+              <router-link to="/signup">SignUp</router-link>
+            </li>
+              <li><router-link to="/team">Team</router-link></li>
+            <li><a class="nav-link scrollto" href="#about">Logout</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
       </div>
-    <router-view/>
-  </div>
+    </header>
+    <!-- End Header -->
+    <vue-progress-bar />
+    <router-view />
+</div>
+  <!-- <div>
+    <div>
+      <nav class="nav">
+        
+      </nav>
+      
+    </div>
+    
+  </div> -->
 </template>
 <script>
 export default {
-  mounted () {
-    //  [App.vue specific] When App.vue is finish loading finish the progress bar
-    this.$Progress.finish()
+  mounted() {
+    this.$Progress.finish();
   },
-  created () {
-    //  [App.vue specific] When App.vue is first loaded start the progress bar
-    this.$Progress.start()
-    //  hook the progress bar to start before we move router-view
+  created() {
+    this.$Progress.start();
     this.$router.beforeEach((to, from, next) => {
-      //  does the page we want to go to have a meta.progress object
       if (to.meta.progress !== undefined) {
-        let meta = to.meta.progress
-        // parse meta tags
-        this.$Progress.parseMeta(meta)
+        let meta = to.meta.progress;
+        this.$Progress.parseMeta(meta);
       }
-      //  start the progress bar
-      this.$Progress.start()
-      //  continue to next page
-      next()
-    })
-    //  hook the progress bar to finish after we've finished moving router-view
+      this.$Progress.start();
+      next();
+    });
     this.$router.afterEach((to, from) => {
-      //  finish the progress bar
-      this.$Progress.finish()
-    })
-  }
-}
+      this.$Progress.finish();
+    });
+  },
+};
 </script>

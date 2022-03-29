@@ -7,6 +7,7 @@ import add from '../views/add.vue'
 import list from '../views/product_list.vue'
 import show from '../views/show_product'
 import update from '../views/update.vue'
+import team from '../views/team.vue'
 
 
 Vue.use(VueRouter)
@@ -46,6 +47,11 @@ const routes = [
     path: '/update/:id',
     name: 'update',
     component: update
+  },
+  {
+    path: '/team/:id',
+    name: 'team',
+    component: team
   }
 ]
 

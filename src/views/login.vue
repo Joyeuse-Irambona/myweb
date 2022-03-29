@@ -1,21 +1,40 @@
 <template>
-  <div class="bkcont">
-    <h2>Login</h2>
-    <form class="form" @submit.prevent="submitHandler">
-      <div v-if="error" class=" alert alert-danger" role="alert">
-        {{error}}
+  <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>SIGN UP</h2>
+        </div>
+
+        <div class="row">
+             <div class="col-lg-5 d-flex align-items-stretch">
+    
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form" @submit.prevent="submitHandler()">
+              <div class="row">
+          
+              <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" name="email" v-model="email" id="subject" required>
+              </div>
+                <div class="form-group ">
+                  <label for="name">Password</label>
+                  <input type="password" class="form-control" name="password" v-model="password"  id="password" required>
+                </div>
+          
+                <div class="text-center"><button type="submit">Login</button></div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
       </div>
-      <label>Email</label>
-      <input type="email" name="email" v-model="email" required />
-      <label>Password</label>
-      <input type="password" name="password" v-model="password" required />
-      <button type="submit" name="submit">Login</button>
-      <p class="forget-password text-right">
-        <router-link to="signup">Sign up </router-link>
-        <router-link to="forgot">Forget password? </router-link>
-      </p>
-    </form>
-  </div>
+    </section><!-- End Contact Section -->
+
 </template>
 <script>
 import axios from 'axios'
