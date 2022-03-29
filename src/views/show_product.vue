@@ -1,0 +1,67 @@
+<template>
+    <div v-if="product" class="bkb">
+        <h2>{{product.title}}</h2>
+        <h3>{{product.author}}</h3>
+
+        <p><strong>Summary: </strong>{{ product.description }}</p>
+        <p>{{ product.body }}</p>
+
+        <div class="btn">
+            <router-link :to="{ name: 'update', params: { id: product.id } }">Update</router-link>
+            <button @click="deleteProduct">Delete</button>
+        </div>
+    </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            product: {}
+        }
+    },
+
+    methods: {
+        async getProduct() {
+            const token = localStorage.getItem("token");
+          axios.defaults.headers.common["Authorization"] = "Bearer "+token;
+            const id = this.$route.params.id;
+            const res = await fetch(`http://http://product-mgt-api.herokuapp.com/api/product/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth_meth': 'token'
+                },
+            });
+
+            console.log(await res);
+
+            if (res.status === 200) {
+                this.product = await res.json();
+            }
+        },
+
+        async deleteProduct() {
+            var sure = window.confirm("are you sure that you want to delete this product");
+            if (sure) {
+                const id = this.$route.params.id;
+                const res = await fetch(`http://product-mgt-api.herokuapp.com/api/product/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                if (res.status === 200) {
+                    this.$router.push({ name: 'home' });
+                }
+            }
+        }
+    },
+
+    mounted() {
+        this.getProduct();
+    }
+}
+</script>

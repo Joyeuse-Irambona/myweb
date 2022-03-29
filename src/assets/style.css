@@ -1,0 +1,199 @@
+div.dark {
+    --bgColor: #545454;
+    --titleColor: #f0f5f5;
+    --navBarBg: #000000;
+    --cardBg: #141f1f;
+    --cardColor: #e0ebeb;
+    --titleColor: #e0ebeb;
+    --scrollBg: #a1c4c4;
+    --crollTh: #273f3f;
+    --scrollHv: #324e4e;
+    --inputBg: #eff5f5;
+    --btnColor: #eff5f5;
+  }
+  
+  div.light {
+    --bgColor: #d1d1d1;
+    --titleColor: #f0f5f5;
+    --navBarBg: #527a7a;
+    --cardBg: #527a7a;
+    --titleColor: #e0ebeb;
+    --cardColor: #eff5f5;
+    --scrollBg: #a1c4c4;
+    --crollTh: #273f3f;
+    --scrollHv: #324e4e;
+    --inputBg: #eff5f5;
+    --btnColor: #eff5f5;
+  }
+  
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    background-color: #e8e8e8;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.body {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px 10px;
+    border-radius: 15px;
+    background-color: var(--bgColor);
+}
+
+.hd {
+    width: 100%;
+    padding: 20px;
+    background-color: #616161;
+}
+
+.hd nav, .btn {
+    display: flex;
+    justify-content: center;
+}
+
+.hd a, .btn a {
+    display: block;
+    text-decoration: none;
+    font-size: larger;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0px 25px;
+    background-color: #616161;
+    transition: 00.3s ease-in-out;
+}
+
+.hd a:hover, .btn a:hover {
+    background-color: #9c9c9c;
+}
+
+hr {
+    width: 80%;
+    border: 1px solid white;
+}
+
+h2 {
+    text-align: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-width: 700px;
+    margin: auto;
+}
+
+.list > a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 15px 10px;
+    background-color: #fafafa;
+    padding: 15px;
+    transition: 0.2s ease-in-out;
+}
+
+.list > a:hover {
+    background-color: #eeeeee;
+}
+
+.list p {
+    margin: 10px;
+}
+
+.auth {
+    width: fit-content;
+    float: right;
+    padding-right: 20px;
+}
+
+.nobook {
+    width: fit-content;
+    margin: 30px auto;
+}
+
+.nobook a {
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    width: fit-content;
+    margin: auto;
+    transition: 0.3s ease-in-out;
+}
+
+.nobook a:hover {
+    background-color: #9c9c9c;
+}
+
+.bkb {
+    overflow: auto;
+    max-width: 700px;
+    margin: auto;
+}
+
+.bkb h3 {
+    text-align: end;
+    padding-right: 30px;
+}
+
+.bkb p {
+    padding: 20px;
+    font-size: large;
+    line-height: 30px;
+}
+form {
+    padding: 10px 30%;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin: 20px 7px 10px;
+}
+
+form input, textarea {
+    resize: none;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border-radius: 7px;
+    font-size: large;
+}
+
+form button {
+    display: block;
+    margin: 30px auto 5px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: #9c9c9c;
+}
+
+p{
+    margin-left: 45%;
+}
+
+.nav{
+    overflow: hidden;
+
+}
