@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 import home from '../views/home.vue'
 import login from '../views/login.vue'
 import signup from '../views/sign_up.vue'
 import add from '../views/add.vue'
 import list from '../views/product_list.vue'
-import show from '../views/show_product'
+import show_product from '../views/show_product'
 import update from '../views/update.vue'
 import team from '../views/team.vue'
 
@@ -21,7 +22,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
+    
   },
   {
     path: '/signup',
@@ -31,25 +33,37 @@ const routes = [
   {
     path: '/add',
     name: 'add',
-    component: add
+    component: add,
+    meta: {
+      requiresAuth: true
+  }
   },
   {
     path: '/list',
     name: 'list',
-    component: list
+    component: list,
+    meta: {
+      requiresAuth: true
+  }
   },
   {
     path: '/product/:id',
     name: 'product',
-    component: show
+    component: show_product,
+    meta: {
+      requiresAuth: true
+  }
   },
   {
     path: '/update/:id',
     name: 'update',
-    component: update
+    component: update,
+    meta: {
+      requiresAuth: true
+  }
   },
   {
-    path: '/team/:id',
+    path: '/team',
     name: 'team',
     component: team
   }
@@ -61,6 +75,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token");
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  // Check for protected route
+  if (requiresAuth && ! token) next('login')
+  else next();
+});
+
+
+
 
 export default router

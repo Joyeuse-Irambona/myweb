@@ -28,6 +28,13 @@ Vue.use(VueProgressBar, options)
 
 Vue.config.productionTip = false
 
+Vue.prototype.$http  =  axios;
+const  accessToken  =  localStorage.getItem('access_token')
+
+if (accessToken) {
+    Vue.prototype.$http.defaults.headers.common['Authorization'] =  accessToken
+}
+
 new Vue({
   router,
   store,

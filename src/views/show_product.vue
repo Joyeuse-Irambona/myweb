@@ -58,7 +58,8 @@ export default {
                     },
                 });
                 if (res.status === 200) {
-                    this.$router.push({ name: 'home' });
+                     this.$router.push({ name: 'list' });
+                    console.log("got it")
                 }
             }
         }

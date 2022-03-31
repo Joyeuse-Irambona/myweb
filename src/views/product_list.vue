@@ -1,12 +1,24 @@
 <template>
-    <div class="bkcont">
-        <h2>Product list</h2>
+
+<!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Product list</h2>
+         
+        </div>
+
         <p>You want to add a product <router-link to="/add">Add new</router-link></p>
         <hr />
 
-        <div>
-            <div v-if="len">
-                <div class="list" v-for="product in products" :key="product.id">         
+        <div class="">
+
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box"  v-for="product in products" :key="product.id">
+              <div class="icon"><i class="bx bx-layer"></i></div>
+              <div class="list">         
                     <router-link  :to="{ name: 'product', params: { id: product.name } }">
                         <div class="product">
                             <h3>{{ product.name }}</h3>
@@ -14,16 +26,15 @@
                             <p class="auth">{{ product.description }}</p>
                         </div>
                     </router-link>
-                </div>
-            </div>                 
-
-            <div v-else class="noProduct">
-                <h3>You have not yet add any product</h3>
-                <router-link to="add/">Add new product</router-link>
+              </div>    
             </div>
+          </div>
+
+        </div>
 
       </div>
-  </div>
+    </section><!-- End Services Section -->
+
 </template>
 
 <script>

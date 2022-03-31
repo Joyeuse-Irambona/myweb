@@ -15,7 +15,9 @@
               <router-link to="/signup">SignUp</router-link>
             </li>
               <li><router-link to="/team">Team</router-link></li>
-            <li><a class="nav-link scrollto" href="#about">Logout</a></li>
+          </ul>
+          <ul>
+            <li><a class="nav-link scrollto" @click.prevent="handleLogout" >Logout</a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -37,11 +39,33 @@
   </div> -->
 </template>
 <script>
+import axios from 'axios';
+import Vuex, { mapGetters} from 'vuex'
+import { mapActions } from 'vuex';
 export default {
+name:'App',  
+      accessToken: null,
+
+
+  methods:{
+   handleLogout(){
+        localStorage.removeItem('token');
+        this.$router.push('/');
+      }
+      
+   
+  },
+
+
   mounted() {
     this.$Progress.finish();
   },
-  created() {
+
+
+  async created() {
+    const response = await axios.get('http://product-mgt-api.herokuapp.com/api/users');
+    this.$store.dispatch('token', response.data);
+
     this.$Progress.start();
     this.$router.beforeEach((to, from, next) => {
       if (to.meta.progress !== undefined) {

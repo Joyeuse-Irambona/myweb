@@ -3,7 +3,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>SIGN UP</h2>
+          <h2>SIGN IN</h2>
         </div>
 
         <div class="row">
@@ -60,6 +60,7 @@ export default {
           this.$Progress.finish();
           this.$toasted.show("you login successfully")
            localStorage.setItem('token',response.data.token);
+           this.$store.dispatch('token', response.data.token);
            this.$router.push('/list')
           } catch (error) {
             this.$toasted.show("invalid email/password")
