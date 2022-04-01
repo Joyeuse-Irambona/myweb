@@ -91,6 +91,12 @@ export default {
           
           
         }
+    },
+    mounted() {
+    const user = localStorage.getItem("token");
+    if (user) {
+      this.$router.push('/list');
     }
+  }
 }
 </script>

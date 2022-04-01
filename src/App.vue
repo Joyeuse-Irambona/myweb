@@ -10,14 +10,14 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li><router-link to="/" class="a">Home</router-link></li>
-            <li><router-link to="/login">Login</router-link></li>
-            <li>
+            <li v-if="!isUser"><router-link to="/login">Login</router-link></li>
+            <li v-if="!isUser">
               <router-link to="/signup">SignUp</router-link>
             </li>
               <li><router-link to="/team">Team</router-link></li>
           </ul>
           <ul>
-            <li><a class="nav-link scrollto" @click.prevent="handleLogout" >Logout</a></li>
+            <li v-if="isUser" ><router-link to="#" v-on:click.native="handleLogout">Logout</router-link></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -47,16 +47,23 @@ name:'App',
       accessToken: null,
       data() {
         return {
-          isUser : localStorage.getItem("token"),
+          isUser : Boolean(localStorage.getItem("token")),
         }
       },
 
 
   methods:{
-   handleLogout(){
-        localStorage.removeItem('token');
+   handleLogout: function (){
+     console.log("logged out");
+        localStorage.removeItem("token");
+        this.isUser = Boolean(localStorage.getItem("token"));
         this.$router.push('/');
-      }
+      },
+
+      ...mapActions([
+        'testMethod',
+        'logout'
+      ])
       
    
   },
