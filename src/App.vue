@@ -45,6 +45,11 @@ import { mapActions } from 'vuex';
 export default {
 name:'App',  
       accessToken: null,
+      data() {
+        return {
+          isUser : localStorage.getItem("token"),
+        }
+      },
 
 
   methods:{
@@ -58,6 +63,7 @@ name:'App',
 
 
   mounted() {
+    console.log("local user: ", this.isUser);
     this.$Progress.finish();
   },
 

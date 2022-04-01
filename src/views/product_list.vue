@@ -15,11 +15,11 @@
         <div class="">
 
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box"  v-for="product in products" :key="product.id">
+          <div style="justify-content: space-evenly; flex-wrap: wrap; width: 100%;" class="col-xl-3 col-md-6 d-flex align-items-space mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box" style="margin: 10px" v-for="product in products" :key="product.id">
               <div class="icon"><i class="bx bx-layer"></i></div>
               <div class="list">         
-                    <router-link  :to="{ name: 'product', params: { id: product.name } }">
+                    <router-link  :to="{ name: 'product', params: { id: product.id } }">
                         <div class="product">
                             <h3>{{ product.name }}</h3>
                             <p>{{ product.price }}</p>
