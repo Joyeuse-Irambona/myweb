@@ -31,7 +31,7 @@ export default {
             const token = localStorage.getItem("token");
           axios.defaults.headers.common["Authorization"] = "Bearer "+token;
             const id = this.$route.params.id;
-            const res = await fetch(`http://http://product-mgt-api.herokuapp.com/api/product/${id}`, {
+            const res = await fetch(`http://product-mgt-api.herokuapp.com/api/product/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,6 +67,10 @@ export default {
 
     mounted() {
         this.getProduct();
+        const user = localStorage.getItem("token");
+        if (!user) {
+          this.$router.push('/login');
+        }
     }
 }
 </script>

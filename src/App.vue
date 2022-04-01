@@ -52,6 +52,10 @@ name:'App',
       },
 
 
+  computed : {
+      StateUser : function(){ return this.$store.getters.StateUser}
+    },
+
   methods:{
    handleLogout: function (){
      console.log("logged out");
@@ -60,10 +64,11 @@ name:'App',
         this.$router.push('/');
       },
 
-      ...mapActions([
-        'testMethod',
-        'logout'
-      ])
+     async logout (){
+        await this.$store.dispatch('LogOut')
+        this.$router.push('/login')
+      }
+
       
    
   },
@@ -72,6 +77,7 @@ name:'App',
   mounted() {
     console.log("local user: ", this.isUser);
     this.$Progress.finish();
+    console.log("mounted: ", this.$store.user);
   },
 
 

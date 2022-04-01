@@ -29,66 +29,46 @@ Vue.use(VueProgressBar, options)
 
 Vue.config.productionTip = false
 
-Vue.prototype.$http  =  axios;
-const  accessToken  =  localStorage.getItem('access_token')
+Vue.prototype.$http = axios;
+const accessToken = localStorage.getItem('access_token')
 
 if (accessToken) {
-    Vue.prototype.$http.defaults.headers.common['Authorization'] =  accessToken
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = accessToken
 }
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-    accessToken: null,
-    loggingIn: false,
-    loginError: null
-  },
-  mutations: {
-    loginStart: state => state.loggingIn = true,
-    loginStop: (state, errorMessage) => {
-      state.loggingIn = false;
-      state.loginError = errorMessage;
-    },
-    updateAccessToken: (state, accessToken) => {
-      state.accessToken = accessToken;
-    },
-    logout: (state) => {
-      state.accessToken = null;
-    }
-  },
-  actions: {
-    doLogin({ commit }, loginData) {
-      commit('loginStart');
+const state = {
+  user: null,
 
-      axios.post('https://product-mgt-api.herokuapp.com/api/login', {
-        ...loginData
-      })
-      .then(response => {
-        localStorage.setItem('accessToken', response.data.token);
-        commit('loginStop', null);
-        commit('updateAccessToken', response.data.token);
-        router.push('/users');
-      })
-      .catch(error => {
-        commit('loginStop', error.response.data.error);
-        commit('updateAccessToken', null);
-      })
-    },
-    fetchAccessToken({ commit }) {
-      commit('updateAccessToken', localStorage.getItem('accessToken'));
-    },
-    logout({ commit }) {
-      localStorage.removeItem('accessToken');
-      commit('logout');
-      router.push('/login');
-    },
+};
 
-    testMethod({ commit }) {
-      console.log('this can work');
-    }
-  }
-})
+const getters = {
+  StateUser: state => state.user,
+};
+
+const actions = {
+  async LogIn({commit}) {
+    await commit('setUser', localStorage.getItem("token"));
+  },
+
+};
+
+const mutations = {
+  setUser(state) {
+    state.user = localStorage.getItem("token");
+  },
+  LogOut(state){
+    state.user = null
+    state.posts = null
+  },
+};
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+};
 
 new Vue({
   router,

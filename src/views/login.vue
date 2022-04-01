@@ -61,7 +61,8 @@ export default {
           this.$toasted.show("you login successfully")
            localStorage.setItem('token',response.data.token);
            this.$store.dispatch('token', response.data.token);
-           this.$router.push('/list')
+           this.$store.commit('setUser');
+           this.$router.push('/list');
           } catch (error) {
             this.$toasted.show("invalid email/password")
            console.log(error);
@@ -72,6 +73,7 @@ export default {
   },
   mounted() {
     const user = localStorage.getItem("token");
+    console.log("mounted: ", this.$store.getters.StateUser);
     if (user) {
       this.$router.push('/list');
     }
