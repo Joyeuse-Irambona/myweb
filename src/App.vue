@@ -77,7 +77,7 @@ name:'App',
   mounted() {
     console.log("local user: ", this.isUser);
     this.$Progress.finish();
-    console.log("mounted: ", this.$store.user);
+    console.log("mounted: ", this.$store.getters);
   },
 
 

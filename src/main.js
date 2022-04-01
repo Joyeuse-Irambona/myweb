@@ -39,12 +39,12 @@ if (accessToken) {
 Vue.use(Vuex);
 
 const state = {
-  user: null,
+  user: localStorage.getItem('token'),
 
 };
 
 const getters = {
-  StateUser: state => state.user,
+  user: state => state.user,
 };
 
 const actions = {

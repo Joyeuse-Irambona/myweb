@@ -73,7 +73,7 @@ export default {
   },
   mounted() {
     const user = localStorage.getItem("token");
-    console.log("mounted: ", this.$store.getters.StateUser);
+    console.log("mounted: ", this.$store.getters.user);
     if (user) {
       this.$router.push('/list');
     }
